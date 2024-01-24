@@ -30,6 +30,8 @@ const targetURL = process.env.TARGET_URL ;
 const hasuraClientName = process.env.HASURA_CLIENT_NAME ;
 const hasuraAdminSecret = process.env.HASURA_ADMIN_SECRET ;
 const REACT_APP_NODE_URL = process.env.REACT_APP_API_URL;
+console.log("hasuraClientName:", hasuraClientName);
+console.log("hasuraAdminSecret:", hasuraAdminSecret);
 
 // Creating an Axios instance with custom headers
 const axiosInstance = axios.create({
@@ -53,6 +55,7 @@ endpoints.forEach((endpoint) => {
         proxyReq.setHeader("Hasura-Client-Name", hasuraClientName);
         if (endpoint.requestBody) {
           const bodyData = JSON.stringify(req.body);
+          console.log("Request body:", bodyData);
           proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
         }
         // Set request body if provided
@@ -62,6 +65,7 @@ endpoints.forEach((endpoint) => {
         proxyReq.end();
       },
       onError: (err, req, res) => {
+        console.log("res body:", res);
         // Handle errors from the upstream server
         console.error("Proxy Error:", err.message);
         res.status(500).send("Proxy Error: " + err.message);
