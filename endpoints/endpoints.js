@@ -688,10 +688,16 @@ const endpoints = [
     method: "put",
     route: "/api/rest/assessorUpdateForm",
     requestBody: ["form_id", "form_status"],
-  },{
+  },
+  {
     method: "post",
     route: "/api/rest/findForms",
     requestBody: ["param"],
+  },
+  {
+    method: "post",
+    route: "/api/rest/getAllInstitutesSPOC",
+    requestBody: ["limit", "offsetNo"],
   }
 ];
 
